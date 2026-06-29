@@ -8,7 +8,7 @@ export default defineConfig({
     plugins: [
         tanstackRouter({
             target: "react",
-            autoCodeSplitting: true,
+            autoCodeSplitting: true, // Divisão automática de código (lazy loading), vem do Tanstack Router
         }),
         react(),
         tailwindcss(),
