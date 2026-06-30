@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MateriasSubjectIdIndexRouteImport } from './routes/materias/$subjectId.index'
 import { Route as MateriasSubjectIdGradeIdIndexRouteImport } from './routes/materias/$subjectId.$gradeId.index'
+import { Route as MateriasSubjectIdGradeIdUnitIdIndexRouteImport } from './routes/materias/$subjectId.$gradeId.$unitId.index'
 
 const IndexLazyRouteImport = createFileRoute('/')()
 
@@ -32,39 +33,58 @@ const MateriasSubjectIdGradeIdIndexRoute =
     path: '/materias/$subjectId/$gradeId/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const MateriasSubjectIdGradeIdUnitIdIndexRoute =
+  MateriasSubjectIdGradeIdUnitIdIndexRouteImport.update({
+    id: '/materias/$subjectId/$gradeId/$unitId/',
+    path: '/materias/$subjectId/$gradeId/$unitId/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/materias/$subjectId/': typeof MateriasSubjectIdIndexRoute
   '/materias/$subjectId/$gradeId/': typeof MateriasSubjectIdGradeIdIndexRoute
+  '/materias/$subjectId/$gradeId/$unitId/': typeof MateriasSubjectIdGradeIdUnitIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/materias/$subjectId': typeof MateriasSubjectIdIndexRoute
   '/materias/$subjectId/$gradeId': typeof MateriasSubjectIdGradeIdIndexRoute
+  '/materias/$subjectId/$gradeId/$unitId': typeof MateriasSubjectIdGradeIdUnitIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexLazyRoute
   '/materias/$subjectId/': typeof MateriasSubjectIdIndexRoute
   '/materias/$subjectId/$gradeId/': typeof MateriasSubjectIdGradeIdIndexRoute
+  '/materias/$subjectId/$gradeId/$unitId/': typeof MateriasSubjectIdGradeIdUnitIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/materias/$subjectId/' | '/materias/$subjectId/$gradeId/'
+  fullPaths:
+    | '/'
+    | '/materias/$subjectId/'
+    | '/materias/$subjectId/$gradeId/'
+    | '/materias/$subjectId/$gradeId/$unitId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/materias/$subjectId' | '/materias/$subjectId/$gradeId'
+  to:
+    | '/'
+    | '/materias/$subjectId'
+    | '/materias/$subjectId/$gradeId'
+    | '/materias/$subjectId/$gradeId/$unitId'
   id:
     | '__root__'
     | '/'
     | '/materias/$subjectId/'
     | '/materias/$subjectId/$gradeId/'
+    | '/materias/$subjectId/$gradeId/$unitId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   MateriasSubjectIdIndexRoute: typeof MateriasSubjectIdIndexRoute
   MateriasSubjectIdGradeIdIndexRoute: typeof MateriasSubjectIdGradeIdIndexRoute
+  MateriasSubjectIdGradeIdUnitIdIndexRoute: typeof MateriasSubjectIdGradeIdUnitIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -90,6 +110,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MateriasSubjectIdGradeIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/materias/$subjectId/$gradeId/$unitId/': {
+      id: '/materias/$subjectId/$gradeId/$unitId/'
+      path: '/materias/$subjectId/$gradeId/$unitId'
+      fullPath: '/materias/$subjectId/$gradeId/$unitId/'
+      preLoaderRoute: typeof MateriasSubjectIdGradeIdUnitIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -97,6 +124,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   MateriasSubjectIdIndexRoute: MateriasSubjectIdIndexRoute,
   MateriasSubjectIdGradeIdIndexRoute: MateriasSubjectIdGradeIdIndexRoute,
+  MateriasSubjectIdGradeIdUnitIdIndexRoute:
+    MateriasSubjectIdGradeIdUnitIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
